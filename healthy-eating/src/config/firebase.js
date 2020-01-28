@@ -5,13 +5,13 @@ import 'firebase/firestore'
 //Firebase Authenticaion Data
 const firebaseConfig = {
 
-    apiKey: "AIzaSyCMJgvEYT0SwIs3sbrfpF_N-PhDIfwZ0AI",
-    authDomain: "healthy-eating-77d37.firebaseapp.com",
-    databaseURL: "https://healthy-eating-77d37.firebaseio.com",
-    projectId: "healthy-eating-77d37",
-    storageBucket: "healthy-eating-77d37.appspot.com",
-    messagingSenderId: "557664417140",
-    appId: "1:557664417140:web:82bc40b67c819dea362821"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
 
 };
 
@@ -21,26 +21,50 @@ class Firebase {
         firebase.initializeApp(firebaseConfig);
         this.auth = firebase.auth();
         this.dataBase = firebase.firestore();
-    }
+    };
+
 
     //Login Helper
-    login(email, password){
-        return this.auth.signInWithEmailAndPassword(email, password);
-    }
+    login(email, password) {
+		return this.auth.signInWithEmailAndPassword(email, password)
+	}
 
     //Logout Helper
-    logout(){
-        return this.auth.signOut();
+	logout() {
+		return this.auth.signOut()
+	}
+
+    //Register Helper
+	async register(name, email, password) {
+		await this.auth.createUserWithEmailAndPassword(email, password)
+		return this.auth.currentUser.updateProfile({
+			displayName: name
+		})
+    }
+    
+    //Reset Password Helper
+    passwordReset (email) {
+        return this.auth.sendPasswordResetEmail(email);
     }
 
-    //Registration Helper
-    async register(name, email, password){
-        await this.auth.createUserWithEmailAndPassword(email, password)
-        return this.auth.currentUser.updateProfile({
-            displayName: name
-        });
-    }
+    //Update Password Helper
+    passwordUpdate (password) {
+        return this.auth.currentUser.updatePassword(password);
+    }  
+
+    //Authenticate user
+	isInitialized() {
+		return new Promise(resolve => {
+			this.auth.onAuthStateChanged(resolve)
+		})
+	}
+
+    //Display User Name
+	getCurrentUsername() {
+		return this.auth.currentUser && this.auth.currentUser.displayName
+	}
+
 }
 
-export default new Firebase();
+export default new Firebase()
   

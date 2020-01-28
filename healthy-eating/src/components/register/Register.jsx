@@ -1,49 +1,61 @@
-import React, { Fragment, useState } from "react";
-import Header from "../header/Header";
-import Footer from "../footer/footer";
-import firebase from '../../config/firebase'
+import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
+import firebase from '../../config/firebase';
+import Header from '../header/Header';
+import Footer from '../footer/Footer'
 
-function Register () {
-
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPassword] = useState('');
-
-    return ( 
-
-        <Fragment>
+const RegisterPage = () => (
+        <div>
             <Header />
-            <form className="registration-form">
-                <div>
-                    <input type="text" id="name" placeholder="Name"
-                     required value={name} onChange={e => setName(e.target.value)}></input>
-                </div>
-                <div>
-                    <input type="email" id="email" placeholder="E-mail"
-                     required value={email} onChange={e => setEmail(e.target.value)}></input>
-                </div>
-                <div>
-                    <input type="password" id="password" placeholder="Password" 
-                    required value={password} onChange={e => setPassword(e.target.value)}></input>
-                </div>
-                <div>
-                    <input type="password" id="repeatPassword" placeholder="Repeat Password" 
-                    required value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)}></input>
-                </div>
-                <button type="submit" onClick={register}>Register</button>
-            </form>
+                <h3>Registration</h3>
+                <RegisterForm />
             <Footer />
-        </Fragment>
-    );
+        </div>
+      );
+    
 
-    async function register () {
-        try{
+function RegisterForm(props) {
+
+	const [name, setName] = useState('')
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+    const [repeatePassword, setRepeatePassword] = useState('')
+    
+    
+
+	return (
+
+		<form className="registration-form" onSubmit={e => e.preventDefault() && false }>
+            <div>
+                <input name="name" type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)}/>   
+            </div>
+            <div>
+                <input name="email" type="email" placeholder="E-Mail" value={email} onChange={e => setEmail(e.target.value)}/>    
+            </div>
+            <div>
+                <input name="password" type="password" placeholder="Password"  value={password} onChange={e => setPassword(e.target.value)}/>
+            </div>
+            <div>
+                <input name="repeatePassword" type="password" placeholder="Confirm Password" value={repeatePassword} onChange={e => setRepeatePassword(e.target.value)}  />
+            </div>
+            <div>
+                <button type="submit" onClick={onRegister}>Register</button>
+            </div>
+		</form>
+    )
+
+	async function onRegister() {
+		try {
             await firebase.register(name, email, password)
-        }catch(error){
-            alert('Register Fail!')
-        }
-    }
+		} catch(error) {
+			alert(error.message)
+		}
+	}
 }
 
-export default Register;
+export default withRouter(RegisterPage);
+
+
+
+// <button disabled={isInvalid} type="submit">Register</button>
+
