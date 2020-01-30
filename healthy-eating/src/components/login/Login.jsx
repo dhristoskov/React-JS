@@ -38,8 +38,7 @@ const LoginForm = () => {
         }
     }
 
-    const redirect = routeRedirect;
-    if(redirect){
+    if(routeRedirect){
         return <Redirect to="/" />  
     }
 

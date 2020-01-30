@@ -33,7 +33,7 @@ const Header = () => {
 
     const redirect = routeRedirect;
     if(redirect){
-        return <Redirect to="/" />  
+        return <Redirect to="/login" />  
     };
 
     let buttons;
