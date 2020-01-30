@@ -6,13 +6,13 @@ import "firebase/storage";
 //Firebase Authenticaion Data
 const firebaseConfig = {
 
-    apiKey: "AIzaSyCMJgvEYT0SwIs3sbrfpF_N-PhDIfwZ0AI",
-    authDomain: "healthy-eating-77d37.firebaseapp.com",
-    databaseURL: "https://healthy-eating-77d37.firebaseio.com",
-    projectId: "healthy-eating-77d37",
-    storageBucket: "healthy-eating-77d37.appspot.com",
-    messagingSenderId: "557664417140",
-    appId: "1:557664417140:web:82bc40b67c819dea362821"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
 
 };
 
