@@ -1,28 +1,29 @@
-const express = require('express')
-const authValidation = require('../middleware/authValidation');
+const express = require('express');
+const auth = require('../middleware/authValidation');
 const { check, validationResult } = require('express-validator');
 
-const router = require('express').Router();
+const router = express.Router();
 
 const Guest = require('../models/Guests');
 
-router.get('/', authValidation, async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const guests = await Guest.find({ user: req.user.id })
     res.json(guests)
   } catch (err) {
+    console.err(err.message)
     res.status(500).send('Server Error')
   }
 })
 
 router.post('/',
   [
-    authValidation,
+    auth,
     [
-      check('first_name', 'Please provide a name').not().isEmpty().isLength({ min: 4 }),
-      check('last_name', 'Please provide a name').not().isEmpty().isLength({ min: 4 }),
-      check('email', 'Please provide an email').not().isEmpty().isEmail().isLength({ min: 8 }),
-      check('phone', 'Please provide the phone').not().isEmpty().isLength({ min: 6 })
+      check('name', 'Please provide the name').not().isEmpty(),
+      check('secondName', 'Please provide the Last Name').not().isEmpty(),
+      check('phone', 'Please provide the phone').not().isEmpty().isNumeric(),
+      check('email', 'Please provide the email').not().isEmpty().isEmail(),
     ]
   ],
   async (req, res) => {
@@ -31,15 +32,15 @@ router.post('/',
       return res.status(400).json({ errors: errors.array() })
     }
 
-    const { first_name, last_name, email, phone, diet, isconfirmed } = req.body
+    const { name, secondName, phone, email, diet, isconfirmed } = req.body
 
     try {
       const newGuest = new Guest({
         user: req.user.id,
-        first_name,
-        last_name,
-        email,
+        name,
+        secondName,
         phone,
+        email,
         diet,
         isconfirmed
       })
@@ -48,19 +49,21 @@ router.post('/',
       res.json(guest)
 
     } catch (err) {
-      res.status(500).send('server error')
+
+      console.error(err.message)
+      res.status(500).send('Server Error')
     }
   })
 
-router.put('/:id', authValidation, async (req, res) => {
-  const { first_name, last_name, email, phone, diet, isconfirmed} = req.body
+router.put('/:id', auth, async (req, res) => {
+  const { name, secondName, phone, email, diet, isconfirmed } = req.body
 
-  const guestFields = { first_name, last_name, email, phone, diet, isconfirmed };
+  const guestFields = { name, secondName, phone, email, diet, isconfirmed };
 
   try {
     let guest = await Guest.findById(req.params.id)
     if (!guest) return res.status(404).json({ msg: 'Guest not found' })
-
+  
     if (guest.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'Not authorised' })
     }
@@ -72,11 +75,11 @@ router.put('/:id', authValidation, async (req, res) => {
   }
 })
 
-router.delete('/:id', authValidation, async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   try {
     let guest = await Guest.findById(req.params.id)
     if (!guest) return res.status(404).json({ msg: 'Guest not found' })
-
+  
     if (guest.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'Not authorised' })
     }
