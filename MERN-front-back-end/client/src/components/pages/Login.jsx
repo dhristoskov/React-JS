@@ -1,12 +1,62 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/authContext/authContext';
+import styled from 'styled-components';
+
+
+const LoginForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  background: #FFF;
+  padding: 40px;
+  width: 380px;
+  border-radius: 6px; 
+  text-align: center;
+  margin: 2rem auto 80px;
+`;
+
+const Input = styled.input`
+  height: 40px;
+  width: 100%;
+  outline: none;
+  padding: 10px;
+  border: solid 1px black;
+  margin-bottom: 0.3rem;
+`;
+
+const LoginBtn = styled.input`
+  height: 40px;
+  width: 100%;
+  outline: none;
+  padding: 10px;
+  border: none;
+  margin-bottom: 1rem;
+  border: solid 1px black;
+  cursor: pointer;
+  background-color:#DFC989;
+  color: #FFF;
+`;
+
+const Title = styled.h1`
+    color: #DFC989;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+`;
+
+const SubTitle = styled.p`
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: lowercase;
+    margin-bottom: 0.5rem;
+    color: #1A021E;
+`;
 
 const Login = (props) => {
   const { login, isAuthencated, error, clearErrors } = useContext(AuthContext)
   useEffect(() => {
     if (isAuthencated) {
-      props.history.push('/')
+      props.history.push('/home')
       clearErrors()
     } else {
       clearErrors()
@@ -38,18 +88,19 @@ const Login = (props) => {
   const isInvalide = email === '' || password === "" || password.length < 6;
 
   return (
-    <div className="login">
-      <h1>Login</h1>
+    <LoginForm className="login">
+      <Title>Welcome Back</Title>
+      <SubTitle>Enter your credentials to log-in</SubTitle>
       <form onSubmit={onsubmit}>
-        <input type="email" name="email" placeholder="Email" value={email} onChange={onchange} />
-        <input type="password" name="password" placeholder="Password" value={password} onChange={onchange} required />
-        <input  disabled={isInvalide} type="submit" value="Login" className="btn" />
+        <Input type="email" name="email" placeholder="Email" value={email} onChange={onchange} />
+        <Input type="password" name="password" placeholder="Password" value={password} onChange={onchange} required />
+        <LoginBtn  disabled={isInvalide} type="submit" value="Login" className="btn" />
       </form>
       <div className="question">
-        {error !== null && <button className="danger" type="button"  >{error} <span onClick={() => clearErrors()}>X</span></button>}
-        <p>Dont' have an accout? {" "} <Link to='/register'>Sign Up</Link></p>
+        {error !== null && <button className="danger" type="button"  >{error} <span onClick={() => clearErrors()}>Clear</span></button>}
+        <p>Dont' have an accout? {" "} <Link to='/register'>Create one</Link></p>
       </div>
-    </div>
+    </LoginForm>
   )
 }
 export default Login

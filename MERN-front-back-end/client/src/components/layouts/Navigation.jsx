@@ -6,65 +6,86 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Global from '../../styles/globalStyle';
 
+const Header = styled.header`
+    background: linear-gradient(180deg, rgba(223,201,137,1) 0%, rgba(230,235,241,0) 80%);
+    display: flex;
+    align-items: center;
+    min-height: 20vh;
+    justify-content: space-between;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    color: #1A021E;
+    padding: 1rem 2rem;
+`;
+
+const Logo = styled.div`
+    color: #1A021E;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size:20px;
+`;
+
+const SubText = styled.p`
+    color: #1A021E;
+    letter-spacing: 3px;
+    font-size:10px;
+    text-align: start;
+`;
+
+const Ul = styled.ul`
+    display: flex;
+    justify-content: space-around;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size:14px;
+`;
+
+const Li = styled.li`
+    list-style: none;
+    padding: 0 1rem;
+    text-decoration: none;
+    cursor: pointer;
+`;
+
 const Navigation = () => {
-
-    const Header = styled.header`
-      background-color: #DFC989;
-      display: flex;
-      align-items: center;
-      min-height: 8vh;
-      justify-content: space-around;
-      font-size: 16px;
-      font-family: 'Poppins', sans-serif;
-      color: white;
-    `;
-
-    const Logo = styled.div`
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size:20px;
-    `;
-
-    const SubText = styled.p`
-      color: #fff;
-      letter-spacing: 3px;
-      font-size:12px;
-      text-align: center;
-    `;
 
     const { user, logout, isAuthencated, clearErrors } = useContext(AuthContext)
 
     const onLogout = () => {
-        logout()
-        clearErrors()
+        logout();
+        clearErrors();
       }
 
     const loggedIn = (
         <Fragment>
-          <li>
-            Welcome, {user && user.name}
-          </li>
-          <li>
-            <a href='#!' onClick={onLogout}><span className="sm-hide">Logout</span><FaSignOutAlt /></a>
-          </li>
-          <li>
-            <Link to='/about'>About</Link>
-          </li>
+          <Li>
+            <Link to='/home' style={{ textDecoration: 'none', color: '#1A021E', fontWeight: '700' }}>
+              Welcome, {user && user.name}</Link> 
+          </Li>
+          <Li>
+            <Link to='/about' style={{ textDecoration: 'none', color: '#1A021E', fontWeight: '700' }}>About</Link>
+          </Li>
+          <Li>
+            <Link to='/tasks' style={{ textDecoration: 'none', color: '#1A021E', fontWeight: '700' }}>Tasks</Link>
+          </Li>
+          <Li>
+            <Link to='/' style={{ textDecoration: 'none', color: '#1A021E', fontWeight: '700' }} 
+            onClick={onLogout}><span className="sm-hide">Logout</span><FaSignOutAlt /></Link>
+          </Li> 
         </Fragment>
     ); 
 
     const guest = (
         <Fragment>
-          <li>
-            <Link to='/register'>Register</Link>
-          </li>
-          <li>
-            <Link to='/login'>Login</Link>
-          </li>
-          <li>
-            <Link to='/about'>About</Link>
-          </li>
+          <Li>
+            <Link to='/register' style={{ textDecoration: 'none', color: '#1A021E', fontWeight: '700'}}>Register</Link>
+          </Li>
+          <Li>
+            <Link to='/login' style={{ textDecoration: 'none', color: '#1A021E', fontWeight: '700' }}>Login</Link>
+          </Li>
+          <Li>
+            <Link to='/about' style={{ textDecoration: 'none', color: '#1A021E', fontWeight: '700' }}>About</Link>
+          </Li>
         </Fragment>
     );
 
@@ -73,12 +94,12 @@ const Navigation = () => {
         <Global />
           <Header className='navigation'>
             <div className="logo-container">
-              <Logo className="logo"><GiHummingbird />The Perfect Day </Logo>
+              <Logo className="logo"><GiHummingbird /><Link to='/' style={{ textDecoration: 'none', color: '#1A021E' }}>The Perfect Day </Link></Logo>
               <SubText>and the story begins</SubText>
             </div>
-            <ul className="settings">
+            <Ul className="settings">
               {isAuthencated ? loggedIn : guest}
-            </ul>
+            </Ul>
           </Header>
       </Fragment>
     )
