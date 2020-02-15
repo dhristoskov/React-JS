@@ -5,26 +5,17 @@ const guestSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users'
   },
-  first_name: {
+  name: {
     type: String,
-    required: true,
-    min: 4
+    required: true
   },
-  lasts_name: {
+  secondName:{
     type: String,
-    required: true,
-    min: 4
+    required: true
   },
   phone: {
     type: String,
     required: true,
-    min: 6
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-    min: 8
   },
   diet: {
     type: String,
