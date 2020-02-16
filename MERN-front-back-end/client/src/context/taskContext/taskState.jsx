@@ -3,6 +3,9 @@ import axios from 'axios';
 import TaskContext from './taskContext';
 import taskReducer from './taskReducer';
 import {
+    TOGGLE_TASKFILTER,
+    SEARCH_TASK,
+    CLEAR_SEARCH,
     REMOVE_TASK,
     ADD_TASK,
     EDIT_TASK,
@@ -95,6 +98,25 @@ const TaskState = (props) => {
         }
     }
 
+    const toggleTaskFilter = () => {
+        dispatch({
+          type: TOGGLE_TASKFILTER
+        })
+      }
+    
+      //Search Task
+      const search_Task = (task) => {
+        dispatch({
+          type: SEARCH_TASK,
+          payload: task
+        })
+      }
+      const clearSearchTask = () => {
+        dispatch({
+          type: CLEAR_SEARCH
+        })
+      }
+
     //Edit Task
     const edit_Task = (task) => {
         dispatch({
@@ -116,6 +138,8 @@ const TaskState = (props) => {
     return (
         <TaskContext.Provider value={{
           tasks: state.tasks,
+          taskFilter: state.taskFilter,
+          searchTask: state.searchTask,
           editTask: state.editTask,
           error: state.error,
           loading: state.loading,
@@ -124,6 +148,9 @@ const TaskState = (props) => {
           edit_Task,
           clearEdit,
           update_Task,
+          toggleTaskFilter,
+          search_Task,
+          clearSearchTask,
           getTasks,
           clearTasks
         }} >

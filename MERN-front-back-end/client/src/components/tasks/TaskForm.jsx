@@ -40,6 +40,24 @@ const AddBtn = styled.input`
     color: #FFF;
 `;
 
+const Priority = styled.p`
+    font-weight: 600;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    color: #1A021E;
+`;
+
+const Radio = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+`;
+
 const TaskForm = () => {
 
     const context = useContext(TaskContext);
@@ -52,6 +70,7 @@ const TaskForm = () => {
         setTask({
           description: '',
           notice: '',
+          priority: 'Normal'
         })
       }
     }, [editTask, context])
@@ -59,8 +78,9 @@ const TaskForm = () => {
     const [task, setTask] = useState({
         description: '',
         notice: '',
+        priority: 'Normal'
     })
-    const { description, notice } = task
+    const { description, notice, priority } = task
     const onchange = (e) => {
       setTask({
         ...task,
@@ -79,6 +99,7 @@ const TaskForm = () => {
       setTask({
         description: '',
         notice: '',
+        priority: 'Normal'
       })
     }
     return (
@@ -87,6 +108,21 @@ const TaskForm = () => {
         <form onSubmit={onsubmit} >
           <Input type="text" placeholder="Description" name="description" value={description} onChange={onchange} required />
           <Input type="text" placeholder="Notice" name="notice" value={notice} onChange={onchange} required />
+          <Priority>Task Priority</Priority>
+          <Radio>
+            <label className="container">Low
+              <input type="radio" name="priority" value="Low" onChange={onchange} checked={priority === "Low"} />
+                <span className="checkmark"></span>
+              </label>
+              <label className="container">Normal
+              <input type="radio" name="priority" value="Normal" onChange={onchange} checked={priority === "Normal"} />
+                <span className="checkmark"></span>
+              </label>
+              <label className="container">High
+              <input type="radio" name="priority" value="High" onChange={onchange} checked={priority === "High"} />
+                <span className="checkmark"></span>
+              </label>
+          </Radio>
           <AddBtn type="submit" value={editTask !== null ? 'Update Task' : 'Add Task'} className="btn" />
           {editTask !== null ? < AddBtn onClick={clearEdit} type="button" className="btn clear" value="Cancel" /> : null}
         </form>

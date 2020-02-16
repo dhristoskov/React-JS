@@ -1,4 +1,7 @@
 import {
+    TOGGLE_TASKFILTER,
+    SEARCH_TASK,
+    CLEAR_SEARCH,
     REMOVE_TASK,
     ADD_TASK,
     EDIT_TASK,
@@ -42,6 +45,22 @@ export default ( state, { type, payload }) => {
                 ...state,
                 tasks: state.tasks.map(task => task._id === payload._id ? payload : task)
             }     
+        case TOGGLE_TASKFILTER:
+            return {
+            ...state,
+            taskFilter: !state.taskFilter
+            }
+        case SEARCH_TASK:
+            const regex = new RegExp(`${payload}`, 'gi')
+            return {
+            ...state,
+            searchTask: state.tasks.filter(task => task.description.match(regex))
+            }
+        case CLEAR_SEARCH:
+            return {
+            ...state,
+            searchTask: null
+            }
         case TASKS_ERROR:
             return {
                 ...state,
@@ -50,6 +69,8 @@ export default ( state, { type, payload }) => {
         case CLEAR_TASKS:
             return {
                 ...state,
+                taskFilter: false,
+                searchTask: null,
                 editTask: null,
                 tasks: [],
                 error: null

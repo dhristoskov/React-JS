@@ -49,15 +49,14 @@ const Dietary = styled.p`
 `;
 
 const Radio = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  padding-left: 25px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 1rem;
 `;
-
 
 
 const GuestForm = () => {

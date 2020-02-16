@@ -1,5 +1,5 @@
 import {
-    //TOGGLE_GUESTFILTER,
+    TOGGLE_GUESTFILTER,
     SEARCH_GUEST,
     CLEAR_SEARCH,
     REMOVE_GUEST,
@@ -45,11 +45,11 @@ import {
           ...state,
           guests: state.guests.map(guest => guest._id === payload._id ? payload : guest)
         }
-    //   case TOGGLE_GUESTFILTER:
-    //     return {
-    //       ...state,
-    //       guestFilter: !state.guestFilter
-    //     }
+      case TOGGLE_GUESTFILTER:
+        return {
+          ...state,
+          guestFilter: !state.guestFilter
+        }
       case SEARCH_GUEST:
         const regex = new RegExp(`${payload}`, 'gi')
         return {

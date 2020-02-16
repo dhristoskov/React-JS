@@ -7,10 +7,10 @@ import styled from 'styled-components';
 import Global from '../../styles/globalStyle';
 
 const Header = styled.header`
-    background: linear-gradient(180deg, rgba(223,201,137,1) 0%, rgba(230,235,241,0) 80%);
+    background: #DFC989;
     display: flex;
     align-items: center;
-    min-height: 20vh;
+    min-height: 16vh;
     justify-content: space-between;
     font-size: 18px;
     font-family: 'Poppins', sans-serif;
@@ -37,7 +37,7 @@ const Ul = styled.ul`
     justify-content: space-around;
     text-transform: uppercase;
     letter-spacing: 3px;
-    font-size:14px;
+    font-size:12px;
 `;
 
 const Li = styled.li`

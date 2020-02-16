@@ -1,8 +1,18 @@
 import React, { useContext, useEffect } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import GuestItem from './GuestSettings';
 import GuestContext from '../../context/guestContext/guestContext';
 import AuthContext from '../../context/authContext/authContext';
+import styled from 'styled-components';
+
+const List = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 90%;
+    margin: auto;
+    margin-top:3.5rem;
+    padding: 1rem;
+`;
 
 
 
@@ -22,7 +32,7 @@ const GuestsList = () => {
 
   return (
     <div >
-      <TransitionGroup className="guests">
+      <List>
         {searchGuest !== null ? searchGuest.map(guest => (
           <CSSTransition key={guest._id} timeout={300}
             classNames='item' >
@@ -33,7 +43,7 @@ const GuestsList = () => {
             <GuestItem guest={guest} />
           </CSSTransition>)
           )}
-      </TransitionGroup>
+      </List>
     </div>
   )
 }

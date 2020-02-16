@@ -2,6 +2,8 @@
 export const TOGGLE_GUESTFILTER = 'TOGGLE_GUESTFILTER';
 export const SEARCH_GUEST = 'SEARCH_GUEST';
 export const CLEAR_SEARCH = 'CLEAR_SEARCH';
+export const TOGGLE_TASKFILTER = 'TOGGLE_TASKFILTER';
+export const SEARCH_TASK = 'SEARCH_TASK';
 
 //Guests
 export const REMOVE_GUEST = 'REMOVE_GUEST';
