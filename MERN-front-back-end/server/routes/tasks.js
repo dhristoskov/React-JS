@@ -28,12 +28,13 @@ router.post('/',
         if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
         }
-        const { description, notice, isItDone } = req.body;
+        const { description, notice, priority, isItDone } = req.body;
             try{
                 const newTask = new Task({
                     user: req.user.id,
                     description,
                     notice,
+                    priority,
                     isItDone
                 });
 
@@ -47,9 +48,9 @@ router.post('/',
 });
 
 router.put('/:id', auth, async (req, res) => {
-    const { description, notice, isItDone } = req.body;
+    const { description, notice, priority, isItDone } = req.body;
 
-    const taskField = { description, notice, isItDone };
+    const taskField = { description, notice, priority, isItDone };
 
     try{
         const task = await Task.findById(req.param.id);
