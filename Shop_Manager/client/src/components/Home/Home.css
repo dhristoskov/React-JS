@@ -1,0 +1,19 @@
+.landingMain {
+    position: absolute;
+    top: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    margin-left: 35%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.landingMain p {
+    font-size: 14px;
+    line-height: 18px;
+    margin-top: 10px;
+}
+
+.landingMain h3 {
+    font-size: 25px;
+    line-height: 30px;
+}
