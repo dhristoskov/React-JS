@@ -1,0 +1,75 @@
+.shopForm {
+    width: 360px;
+    height: 400px;
+    padding: 80px 40px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-family: 'Poppins', sans-serif;
+}
+
+.shopHeader {
+    color: #283256;
+    text-align: center;
+}
+
+.subName {
+    font-size: 12px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+input {
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;border-bottom: 2px solid #283256;
+    position: relative;
+    margin: 10px 0;
+}
+
+.btn{
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: linear-gradient(120deg,#3498db,#8e44ad,#3498db);
+    background-size: 200%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.btn:hover{
+    background-position: right;
+  }
+
+.shopList {
+    padding: 80px 40px;
+    position: absolute;
+    left: 80%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.item {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    list-style: none;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.item span {
+    font-size: 12px;
+    margin-left: 10px;
+}

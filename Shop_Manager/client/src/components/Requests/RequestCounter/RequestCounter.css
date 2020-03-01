@@ -1,0 +1,36 @@
+table {
+    display: flex;
+    border-collapse: collapse;
+    width: 300px;
+    text-transform: capitalize;
+    font-size: bold;
+    font-family: 'Poppins', sans-serif;
+}
+   
+td {
+    text-align: center;
+    padding: 0.7rem 1.6rem;
+}
+
+th {
+    text-align: center;
+    padding: 0.7rem 1.6rem;
+}
+
+tr:nth-child(even) {
+    background-color: #283256;
+    color: white;
+}
+
+.tableHeader{
+    color: #283256;
+    text-align: center;
+}
+
+.tableCounter {
+    padding: 80px 40px;
+    position: absolute;
+    left: 80%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
